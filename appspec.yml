@@ -14,3 +14,4 @@ hooks:
   ApplicationStop:
     - location: application_stop.sh
       runas: ec2-user
+      
