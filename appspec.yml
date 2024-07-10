@@ -3,15 +3,12 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/Flask-App
-
 hooks:
   BeforeInstall:
-    - location: setup.sh
+    - location: scripts/before_install.sh
+      timeout: 300
       runas: ec2-user
-  ApplicationStart:
-    - location: application_start.sh
+  AfterInstall:
+    - location: scripts/setup.sh
+      timeout: 300
       runas: ec2-user
-  ApplicationStop:
-    - location: application_stop.sh
-      runas: ec2-user
-      
