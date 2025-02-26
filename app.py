@@ -1,7 +1,10 @@
-from flask import Blueprint, jsonify
+from flask import Flask
 
-main = Blueprint('main', __name__)
+app = Flask(__name__)
 
-@main.route('/')
-def home():
-    return jsonify(message="Hello python!")
+@app.route('/')
+def hello():
+    return 'Hello, world!'
+
+if __name__ == '__main__':
+    app.run()
