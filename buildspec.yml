@@ -16,7 +16,7 @@ phases:
       - echo "Dependencies and file check..."
       - pip --version
       - ls -l # List files to verify location
-      - pip install -r requirements.txt
+      - pip install -r FlaskApp/requirements.txt
 
   build:
     commands:
