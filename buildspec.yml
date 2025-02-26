@@ -1,4 +1,3 @@
-
 version: 0.2
 
 env:
@@ -11,10 +10,14 @@ phases:
   install:
     runtime-versions:
       python: 3.11
+    commands:
+      - echo "Installing dependencies..."
+      - pip install --upgrade pip
+      - pip --version  # Verifies pip installation
+
   pre_build:
     commands:
       - echo "Dependencies and file check..."
-      - pip --version
       - ls -l # List files to verify location
       - pip install -r FlaskApp/requirements.txt
 
