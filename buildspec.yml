@@ -12,6 +12,7 @@ phases:
   pre_build:
     commands:
       - echo "Installing dependencies..."
+      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
       - pip install -r requirements.txt
   build:
     commands:
