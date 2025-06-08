@@ -1,17 +1,11 @@
 #!/bin/bash
 
-CONTAINER_NAME=flask-app
-IMAGE_NAME=dockerhubusername/your-image-name:latest
+# Stop and remove old container if running
+docker stop githubactionsdemo || true
+docker rm githubactionsdemo || true
 
-# Stop existing container if running
-docker stop $CONTAINER_NAME 2>/dev/null || true
-docker rm $CONTAINER_NAME 2>/dev/null || true
+# Pull the latest image
+docker pull $DOCKER_USERNAME/githubactionsdemo:latest
 
-# Pull new image
-docker pull $IMAGE_NAME
-
-# Run container
-docker run -d \
-  --name $CONTAINER_NAME \
-  -p 8000:8000 \
-  $IMAGE_NAME
+# Run new container
+docker run -d --name githubactionsdemo -p 8000:8000 $DOCKER_USERNAME/githubactionsdemo:latest
