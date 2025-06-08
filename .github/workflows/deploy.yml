@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the code (needed for docker build context)
+    # Step 1: Checkout your GitHub repo
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Step 2: Set up Docker Buildx (for advanced build support)
+    # Step 2: Set up Docker Buildx
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
@@ -25,11 +25,11 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # Step 4: Build & Push Docker image
+    # Step 4: Build and push the Docker image
     - name: Build and push Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/your-image-name:latest .
-        docker push ${{ secrets.DOCKER_USERNAME }}/your-image-name:latest
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/githubactionsdemo:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/githubactionsdemo:latest
 
     # Step 5: SSH into EC2 and deploy
     - name: SSH into EC2 and deploy
@@ -43,14 +43,16 @@ jobs:
 
           # Clone the repo if not already present
           if [ ! -d "FlaskApp" ]; then
-            git clone https://github.com/your-username/FlaskApp.git
+            git clone https://github.com/VTS072Varun/FlaskApp.git
           fi
 
           cd FlaskApp
 
-          # Pull latest changes
+          # Pull latest code
           git pull origin main
 
-          # Run deployment scripts
+          # Stop old container
           bash stop_application.sh || true
+
+          # Start new container
           bash start_application.sh
