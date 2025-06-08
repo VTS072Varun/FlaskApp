@@ -41,3 +41,5 @@ jobs:
           git pull origin main
           bash stop_application.sh || true
           bash start_application.sh
+
+
